@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /* The basketball class is a computer game that allows you to play as
   Dartmouth College's captain and playmaker
-  The game uses set probabilites to simulate outcomes of each posession
+  The game uses set probabilities to simulate outcomes of each possession
   You are able to choose your shot types as well as defensive formations */
 
 public class Basketball {
@@ -44,7 +44,7 @@ public class Basketball {
 
         // makes sure that input is legal
         while (!defense_choices.contains(defense)) {
-            System.out.print("Your new defensive allignment is? ");
+            System.out.print("Your new defensive alignment is? ");
             if (scanner.hasNextDouble()) {
                 defense = scanner.nextDouble();
             }
@@ -80,7 +80,7 @@ public class Basketball {
         Scanner scanner = new Scanner(System.in); // creates a scanner
 
         while (!defense_choices.contains(defense)) {
-            System.out.println("Your new defensive allignment is? ");
+            System.out.println("Your new defensive alignment is? ");
             if (scanner.hasNextDouble()) {
                 defense = (double)(scanner.nextDouble());
             }
@@ -125,7 +125,7 @@ public class Basketball {
         System.out.println("Score:  " + score[1] + " to " + score[0] + "\n");
     }
 
-    // simulates a center jump for posession at the beginning of a period
+    // simulates a center jump for possession at the beginning of a period
     private void start_of_period() {
         System.out.println("Center jump");
         if (Math.random() > .6) {
@@ -279,7 +279,7 @@ public class Basketball {
     }
 
 
-    // plays out a Dartmouth posession, starting with your choice of shot
+    // plays out a Dartmouth possession, starting with your choice of shot
     private void dartmouth_ball() {
         Scanner scanner = new Scanner(System.in); // creates a scanner
         System.out.print("Your shot? ");
@@ -330,7 +330,7 @@ public class Basketball {
         }
     }
 
-    // simulates the opponents jumpshot
+    // simulates the opponents jump shot
     private void opponent_jumpshot() {
         System.out.println("Jump Shot.");
         if (8/defense*Math.random() > .35) {
@@ -443,7 +443,7 @@ public class Basketball {
         }
     }
 
-    // simulates an opponents possesion
+    // simulates an opponent's possession
     // #randomly picks jump shot or lay up / set shot.
     private void opponent_ball() {
         time ++;
