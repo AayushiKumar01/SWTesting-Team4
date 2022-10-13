@@ -1,6 +1,7 @@
 import java.lang.Math;
 import java.util.*;
 import java.util.Scanner;
+import java.util.function.Supplier;
 
 /* The basketball class is a computer game that allows you to play as
   Dartmouth College's captain and playmaker
@@ -53,11 +54,15 @@ public class Basketball {
     }
 
     // simulates two foul shots for a player and adds the points
-    private void foul_shots(int team) {
+    protected void foul_shots(int team) {
+        foul_shots(team, () -> {return Math.random();});
+    }
+
+    protected void foul_shots(int team, Supplier<Double> supplier) {
         System.out.println("Shooter fouled.  Two shots.");
 
-        if (Math.random() > .49) {
-            if (Math.random() > .75) {
+        if (supplier.get() > .49) {
+            if (supplier.get() > .75) {
                 System.out.println("Both shots missed.");
             }
             else {
@@ -72,6 +77,7 @@ public class Basketball {
 
         print_score();
     }
+
 
     // called when time = 50, starts a new period
     protected void halftime() {

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -64,6 +65,23 @@ class BasketballTest {
 
         Assert.assertEquals("*** Two minutes left in the game ***", outputStreamCaptor.toString()
                 .trim());
+    }
+
+    @Test
+    public void basketball_foulShot_with_greater_than_80Percent_printsExpected() {
+        Basketball bb = new Basketball();
+        bb.foul_shots(1, ()-> {return 0.8;});
+        Assert.assertTrue(outputStreamCaptor.toString()
+                .trim().contains("Both shots missed."));
+    }
+
+    @Test
+    public void basketball_foulShot_with_between_49To75Percent_printsExpected() {
+        Basketball bb = new Basketball();
+        bb.foul_shots(1, ()-> {return 0.6;});
+        System.out.print(outputStreamCaptor.toString());
+        Assert.assertTrue(outputStreamCaptor.toString()
+                .trim().contains("Shooter makes one shot and misses one."));
     }
 
     @AfterEach
