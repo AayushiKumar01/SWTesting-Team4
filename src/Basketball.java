@@ -19,57 +19,17 @@ public class Basketball {
 
     public Basketball() {
 
-        // Explains the keyboard inputs
-        System.out.println("\t\t\t Basketball");
-        System.out.println("\t Creative Computing  Morristown, New Jersey\n\n\n");
-        System.out.println("This is Dartmouth College basketball. ");
-        System.out.println("Υou will be Dartmouth captain and playmaker.");
-        System.out.println("Call shots as follows:");
-        System.out.println("1. Long (30ft.) Jump Shot; 2. Short (15 ft.) Jump Shot; "
-                + "3. Lay up; 4. Set Shot");
-        System.out.println("Both teams will use the same defense. Call Defense as follows:");
-        System.out.println("6. Press; 6.5 Man-to-Man; 7. Zone; 7.5 None.");
-        System.out.println("To change defense, just type 0 as your next shot.");
-        System.out.print("Your starting defense will be? ");
-
-        Scanner scanner = new Scanner(System.in); // creates a scanner
-
-        // takes input for a defense
-        if (scanner.hasNextDouble()) {
-            defense = scanner.nextDouble();
-        }
-        else {
-            scanner.next();
-        }
-
-        // makes sure that input is legal
-        while (!defense_choices.contains(defense)) {
-            System.out.print("Your new defensive alignment is? ");
-            if (scanner.hasNextDouble()) {
-                defense = scanner.nextDouble();
-            }
-            else {
-                scanner.next();
-                continue;
-            }
-        }
-
-        // takes input for opponent's name
-        System.out.print("\nChoose your opponent? ");
-
-        opponent = scanner.next();
-        start_of_period();
     }
 
     // adds points to the score
     // team can take 0 or 1, for opponent or Dartmouth, respectively
-    private void add_points(int team, int points) {
+    protected void add_points(int team, int points) {
         score[team] += points;
         print_score();
     }
 
 
-    private void ball_passed_back() {
+    protected void ball_passed_back() {
         System.out.print("Ball passed back to you. ");
         dartmouth_ball();
     }
@@ -121,8 +81,8 @@ public class Basketball {
     }
 
     // prints the current score
-    private void print_score() {
-        System.out.println("Score:  " + score[1] + " to " + score[0] + "\n");
+    protected void print_score() {
+        System.out.println("Score: " + score[1] + " to " + score[0] + "\n");
     }
 
     // simulates a center jump for possession at the beginning of a period
@@ -458,8 +418,49 @@ public class Basketball {
             opponent_jumpshot();
         }
     }
+    public void run() {
+        System.out.println("\t\t\t Basketball");
+        System.out.println("\t Creative Computing  Morristown, New Jersey\n\n\n");
+        System.out.println("This is Dartmouth College basketball. ");
+        System.out.println("Υou will be Dartmouth captain and playmaker.");
+        System.out.println("Call shots as follows:");
+        System.out.println("1. Long (30ft.) Jump Shot; 2. Short (15 ft.) Jump Shot; "
+                + "3. Lay up; 4. Set Shot");
+        System.out.println("Both teams will use the same defense. Call Defense as follows:");
+        System.out.println("6. Press; 6.5 Man-to-Man; 7. Zone; 7.5 None.");
+        System.out.println("To change defense, just type 0 as your next shot.");
+        System.out.print("Your starting defense will be? ");
 
+        Scanner scanner = new Scanner(System.in); // creates a scanner
+
+        // takes input for a defense
+        if (scanner.hasNextDouble()) {
+            defense = scanner.nextDouble();
+        }
+        else {
+            scanner.next();
+        }
+
+        // makes sure that input is legal
+        while (!defense_choices.contains(defense)) {
+            System.out.print("Your new defensive alignment is? ");
+            if (scanner.hasNextDouble()) {
+                defense = scanner.nextDouble();
+            }
+            else {
+                scanner.next();
+                continue;
+            }
+        }
+
+        // takes input for opponent's name
+        System.out.print("\nChoose your opponent? ");
+
+        opponent = scanner.next();
+        start_of_period();
+    }
     public static void main(String[] args) {
         Basketball new_game = new Basketball();
+        new_game.run();
     }
 }
