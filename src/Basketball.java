@@ -74,7 +74,7 @@ public class Basketball {
     }
 
     // called when time = 50, starts a new period
-    private void halftime() {
+    protected void halftime() {
         System.out.println("\n   ***** End of first half *****\n");
         print_score();
         start_of_period();
@@ -99,7 +99,7 @@ public class Basketball {
     }
 
     // called when t = 92
-    private void two_minute_warning() {
+    void two_minute_warning() {
         System.out.println("   *** Two minutes left in the game ***");
     }
 

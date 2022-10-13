@@ -57,6 +57,15 @@ class BasketballTest {
         Assert.assertThrows(ArrayIndexOutOfBoundsException.class, () -> bb.add_points(-1, 1));
     }
 
+    @Test
+    public void basketball_two_minute_warning_test() {
+        Basketball bb = new Basketball();
+        bb.two_minute_warning();
+
+        Assert.assertEquals("*** Two minutes left in the game ***", outputStreamCaptor.toString()
+                .trim());
+    }
+
     @AfterEach
     public void tearDown() {
         System.setOut(standardOut);
