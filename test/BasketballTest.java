@@ -51,6 +51,12 @@ class BasketballTest {
         Assert.assertThrows(ArrayIndexOutOfBoundsException.class, () -> bb.add_points(2, 2));
     }
 
+    @Test
+    public void basketball_invalid_AddPoints2() {
+        Basketball bb = new Basketball();
+        Assert.assertThrows(ArrayIndexOutOfBoundsException.class, () -> bb.add_points(-1, 1));
+    }
+
     @AfterEach
     public void tearDown() {
         System.setOut(standardOut);
