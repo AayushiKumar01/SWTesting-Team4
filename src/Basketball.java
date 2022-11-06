@@ -297,7 +297,7 @@ public class Basketball {
     }
 
     // simulates the opponents jump shot
-    private void opponent_jumpshot() {
+    protected void opponent_jumpshot() {
         System.out.println("Jump Shot.");
         if (8/defense*Math.random() > .35) {
             if (8/defense*Math.random() > .75) {
@@ -357,7 +357,7 @@ public class Basketball {
     }
 
     // simulates opponents lay up or set shot
-    private void opponent_non_jumpshot() {
+    protected void opponent_non_jumpshot() {
         if (opponent_chance > 3) {
             System.out.println("Set shot.");
         }

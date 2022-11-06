@@ -208,7 +208,48 @@ public class BasketballTest {
         afterEachSetup();
     }
 
+    @Test
+    public void opponent_ball_test_WhenTimeisFifty()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        Mockito.doNothing().when(bb).opponent_non_jumpshot();
+        Mockito.doNothing().when(bb).opponent_jumpshot();
+        bb.time=49;
+        bb.opponent_ball();
+        Mockito.verify(bb, Mockito.times(1)).halftime();
+        afterEachSetup();
+    }
 
+    @Test
+    public void opponent_ball_test_OpponentChanceGreaterThanTwo_callsOpponentNonJumpshot()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        Mockito.doNothing().when(bb).opponent_non_jumpshot();
+        Mockito.doNothing().when(bb).opponent_jumpshot();
+        Mockito.doNothing().when(bb).halftime();
+        bb.time=49;
+        Mockito.when(Math.random()).thenReturn(4.1);
+        bb.opponent_ball();
+        Mockito.verify(bb, Mockito.times(1)).opponent_non_jumpshot();
+        afterEachSetup();
+    }
+
+    @Test
+    public void opponent_ball_test_OpponentChanceLessThanTwo_callsOpponentJumpshot()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        Mockito.doNothing().when(bb).opponent_non_jumpshot();
+        Mockito.doNothing().when(bb).opponent_jumpshot();
+        Mockito.doNothing().when(bb).halftime();
+        bb.time=49;
+        Mockito.when(Math.random()).thenReturn(0.1);
+        bb.opponent_ball();
+        Mockito.verify(bb, Mockito.times(1)).opponent_jumpshot();
+        afterEachSetup();
+    }
     @AfterEach
     public void afterEachSetup() {
         System.setOut(standardOut);
