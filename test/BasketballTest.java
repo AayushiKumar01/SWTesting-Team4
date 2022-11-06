@@ -163,6 +163,52 @@ public class BasketballTest {
         afterEachSetup();
     }
 
+    @Test
+    public void ball_passed_back_test()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        Mockito.doNothing().when(bb).dartmouth_ball();
+
+        bb.ball_passed_back();
+        Assert.assertEquals("Ball passed back to you.", outputStreamCaptor.toString().trim());
+        Mockito.verify(bb, Mockito.times(1)).dartmouth_ball();
+        afterEachSetup();
+    }
+
+    @Test
+    public void halftime_test_withRandomMorethan50_callsOpponent()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        Mockito.doNothing().when(bb).dartmouth_ball();
+        Mockito.doNothing().when(bb).opponent_ball();
+
+        Mockito.when(Math.random()).thenReturn(0.7);
+        bb.halftime();
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Dartmouth controls the tap."));
+        Mockito.verify(bb, Mockito.times(1)).dartmouth_ball();
+        Mockito.verify(bb, Mockito.times(1)).start_of_period();
+        afterEachSetup();
+    }
+
+    @Test
+    public void halftime_test_withRandomLessthan50_callsOpponent()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        Mockito.doNothing().when(bb).dartmouth_ball();
+        Mockito.doNothing().when(bb).opponent_ball();
+        Mockito.when(Math.random()).thenReturn(0.5);
+        bb.halftime();
+
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("controls the tap."));
+        Mockito.verify(bb, Mockito.times(1)).opponent_ball();
+        Mockito.verify(bb, Mockito.times(1)).start_of_period();
+        afterEachSetup();
+    }
+
+
     @AfterEach
     public void afterEachSetup() {
         System.setOut(standardOut);

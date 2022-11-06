@@ -36,7 +36,7 @@ public class Basketball {
     }
 
     // change defense, called when the user enters 0 for their shot
-    private void change_defense() {
+    protected void change_defense() {
         defense = -1;
         Scanner scanner = new Scanner(System.in); // creates a scanner
 
@@ -92,7 +92,7 @@ public class Basketball {
     }
 
     // simulates a center jump for possession at the beginning of a period
-    private void start_of_period() {
+    protected void start_of_period() {
         System.out.println("Center jump");
         if (Math.random() > .6) {
             System.out.println("Dartmouth controls the tap.\n");
@@ -182,7 +182,7 @@ public class Basketball {
 
     // called when the user enters 0, 3, or 4
     // lay up, set shot, or defense change
-    private void dartmouth_non_jump_shot() {
+    protected void dartmouth_non_jump_shot() {
         time ++;
         if (time == 50) {
             halftime();
@@ -246,7 +246,7 @@ public class Basketball {
 
 
     // plays out a Dartmouth possession, starting with your choice of shot
-    private void dartmouth_ball() {
+    protected void dartmouth_ball() {
         Scanner scanner = new Scanner(System.in); // creates a scanner
         System.out.print("Your shot? ");
         shot = -1;
@@ -411,7 +411,7 @@ public class Basketball {
 
     // simulates an opponent's possession
     // #randomly picks jump shot or lay up / set shot.
-    private void opponent_ball() {
+    protected void opponent_ball() {
         time ++;
         if (time == 50) {
             halftime();
