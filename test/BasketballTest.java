@@ -83,6 +83,38 @@ class BasketballTest {
         Assert.assertTrue(outputStreamCaptor.toString()
                 .trim().contains("Shooter makes one shot and misses one."));
     }
+    
+    @Test
+    public void basketball_foulShot_with_less_than_49percent_48percent_printsExpected() {
+        Basketball bb = new Basketball();
+        bb.foul_shots(1, ()-> {return 0.48;});
+        Assert.assertTrue(outputStreamCaptor.toString()
+                .trim().contains("Shooter makes both shots."));
+    }
+
+    @Test
+    public void basketball_foulShot_with_exact_49percent_printsExpected() {
+        Basketball bb = new Basketball();
+        bb.foul_shots(1, ()-> {return 0.49;});
+        Assert.assertTrue(outputStreamCaptor.toString()
+                .trim().contains("Shooter makes both shots."));
+    }
+
+    @Test
+    public void basketball_foulShot_with_less_than_75percent_74percent_printsExpected() {
+        Basketball bb = new Basketball();
+        bb.foul_shots(1, ()-> {return 0.74;});
+        Assert.assertTrue(outputStreamCaptor.toString()
+                .trim().contains("Shooter makes one shot and misses one."));
+    }
+
+    @Test
+    public void basketball_foulShot_with_exact_75percent_printsExpected() {
+        Basketball bb = new Basketball();
+        bb.foul_shots(1, ()-> {return 0.75;});
+        Assert.assertTrue(outputStreamCaptor.toString()
+                .trim().contains("Shooter makes one shot and misses one."));
+    }
 
     @AfterEach
     public void tearDown() {
