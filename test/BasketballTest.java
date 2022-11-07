@@ -505,6 +505,30 @@ public class BasketballTest {
     }
 
     @Test
+    public void test_dartmouth_ball_for_shot_choice_not_in_choices_to_cover_else(){
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        System.setIn(new ByteArrayInputStream("6\nab\n4\n".getBytes()));
+        bb.time = 51;
+        Mockito.doNothing().when(bb).dartmouth_non_jump_shot();
+        Mockito.when(Math.random()).thenReturn(0.4);
+        bb.dartmouth_ball();
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_dartmouth_ball_for_non_integer_to_cover_else(){
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        System.setIn(new ByteArrayInputStream("ab\n4\n".getBytes()));
+        bb.time = 51;
+        Mockito.doNothing().when(bb).dartmouth_non_jump_shot();
+        Mockito.when(Math.random()).thenReturn(0.4);
+        bb.dartmouth_ball();
+        afterEachSetup();
+    }
+
+    @Test
     public void test_change_defense_for_valid_defense_choice1(){
         beforeEachSetUp();
         Basketball bb = Mockito.spy(new Basketball());
@@ -538,6 +562,16 @@ public class BasketballTest {
         beforeEachSetUp();
         Basketball bb = Mockito.spy(new Basketball());
         System.setIn(new ByteArrayInputStream("9.0\n6.0\n".getBytes()));
+        Mockito.doNothing().when(bb).dartmouth_ball();
+        bb.change_defense();
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_change_defense_for_non_double_to_cover_else(){
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        System.setIn(new ByteArrayInputStream("ab\n6.0\n".getBytes()));
         Mockito.doNothing().when(bb).dartmouth_ball();
         bb.change_defense();
         afterEachSetup();

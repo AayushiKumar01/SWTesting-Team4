@@ -46,6 +46,8 @@ public class Basketball {
                 defense = (double)(scanner.nextDouble());
             }
             else {
+                System.out.println("");
+                scanner.next();
                 continue;
             }
         }
