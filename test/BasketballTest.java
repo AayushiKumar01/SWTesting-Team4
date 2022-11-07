@@ -426,9 +426,8 @@ public class BasketballTest {
     public void test_dartmouth_ball_for_shot_choice_0(){
         beforeEachSetUp();
         Basketball bb = Mockito.spy(new Basketball());
-        System.setIn(new ByteArrayInputStream("0\n0\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("0\n".getBytes()));
         bb.time = 51;
-        Scanner keyboard = new Scanner(System.in);
         Mockito.doNothing().when(bb).dartmouth_non_jump_shot();
         Mockito.when(Math.random()).thenReturn(0.4);
         bb.dartmouth_ball();
@@ -439,9 +438,8 @@ public class BasketballTest {
     public void test_dartmouth_ball_for_shot_choice_1(){
         beforeEachSetUp();
         Basketball bb = Mockito.spy(new Basketball());
-        System.setIn(new ByteArrayInputStream("1\n1\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("1\n".getBytes()));
         bb.time = 51;
-        Scanner keyboard = new Scanner(System.in);
         Mockito.doNothing().when(bb).dartmouth_jump_shot();
         Mockito.when(Math.random()).thenReturn(0.4);
         bb.dartmouth_ball();
@@ -452,9 +450,8 @@ public class BasketballTest {
     public void test_dartmouth_ball_for_shot_choice_2(){
         beforeEachSetUp();
         Basketball bb = Mockito.spy(new Basketball());
-        System.setIn(new ByteArrayInputStream("1\n1\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("2\n".getBytes()));
         bb.time = 51;
-        Scanner keyboard = new Scanner(System.in);
         Mockito.doNothing().when(bb).dartmouth_jump_shot();
         Mockito.when(Math.random()).thenReturn(0.4);
         bb.dartmouth_ball();
@@ -465,11 +462,10 @@ public class BasketballTest {
     public void test_dartmouth_ball_for_shot_choice_2_time_100_different_scores(){
         beforeEachSetUp();
         Basketball bb = Mockito.spy(new Basketball());
-        System.setIn(new ByteArrayInputStream("1\n1\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("2\n".getBytes()));
         bb.time = 100;
         bb.score[0] = 10;
         bb.score[1] = 11;
-        Scanner keyboard = new Scanner(System.in);
         Mockito.when(Math.random()).thenReturn(0.5);
         bb.dartmouth_ball();
         Assert.assertTrue(outputStreamCaptor.toString().trim().contains("\n   ***** End Of Game *****"));
@@ -482,11 +478,10 @@ public class BasketballTest {
     public void test_dartmouth_ball_for_shot_choice_2_time_100_same_scores(){
         beforeEachSetUp();
         Basketball bb = Mockito.spy(new Basketball());
-        System.setIn(new ByteArrayInputStream("1\n1\n".getBytes()));
+        System.setIn(new ByteArrayInputStream("2\n".getBytes()));
         bb.time = 100;
         bb.score[0] = 10;
         bb.score[1] = 10;
-        Scanner keyboard = new Scanner(System.in);
         Mockito.when(Math.random()).thenReturn(0.5);
         Mockito.doNothing().when(bb).start_of_period();
         bb.dartmouth_ball();
@@ -503,10 +498,48 @@ public class BasketballTest {
         Basketball bb = Mockito.spy(new Basketball());
         System.setIn(new ByteArrayInputStream("6\n4\n".getBytes()));
         bb.time = 51;
-        Scanner keyboard = new Scanner(System.in);
         Mockito.doNothing().when(bb).dartmouth_non_jump_shot();
         Mockito.when(Math.random()).thenReturn(0.4);
         bb.dartmouth_ball();
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_change_defense_for_valid_defense_choice1(){
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        System.setIn(new ByteArrayInputStream("6.0\n".getBytes()));
+        Mockito.doNothing().when(bb).dartmouth_ball();
+        bb.change_defense();
+        afterEachSetup();
+    }
+    @Test
+    public void test_change_defense_for_valid_defense_choice2(){
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        System.setIn(new ByteArrayInputStream("6.5\n".getBytes()));
+        Mockito.doNothing().when(bb).dartmouth_ball();
+        bb.change_defense();
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_change_defense_for_invalid_defense_choice1(){
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        System.setIn(new ByteArrayInputStream("9.0\n6.5\n".getBytes()));
+        Mockito.doNothing().when(bb).dartmouth_ball();
+        bb.change_defense();
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_change_defense_for_invalid_defense_choice2(){
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        System.setIn(new ByteArrayInputStream("9.0\n6.0\n".getBytes()));
+        Mockito.doNothing().when(bb).dartmouth_ball();
+        bb.change_defense();
         afterEachSetup();
     }
 

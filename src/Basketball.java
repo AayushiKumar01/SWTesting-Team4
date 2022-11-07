@@ -283,7 +283,7 @@ public class Basketball {
                 System.out.println("\n   ***** End Of Game *****");
                 System.out.println("Final Score: Dartmouth: " + score[1] + "  "
                         + opponent + ": " + score[0]);
-                System.exit(0);
+                //System.exit(0);
             }
             else {
                 System.out.println("\n   ***** End Of Second Half *****");
