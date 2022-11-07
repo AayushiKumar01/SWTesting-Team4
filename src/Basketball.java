@@ -252,6 +252,7 @@ public class Basketball {
         shot = -1;
         if (scanner.hasNextInt()) {
             shot = scanner.nextInt();
+  //          shot = scanner.nextInt();
         }
         else {
             System.out.println("");

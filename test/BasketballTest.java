@@ -10,11 +10,11 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
+import java.util.Scanner;
 
 import static org.mockito.Mockito.mockingDetails;
+import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({Basketball.class, Math.class}) // Preparing class under test.
@@ -418,6 +418,69 @@ public class BasketballTest {
         afterEachSetup();
     }
 
+    @Test
+    public void test_dartmouth_ball_for_shot_choice_0(){
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        System.setIn(new ByteArrayInputStream("0\n0\n".getBytes()));
+        bb.time = 51;
+        Scanner keyboard = new Scanner(System.in);
+        Mockito.doNothing().when(bb).dartmouth_non_jump_shot();
+        bb.dartmouth_ball();
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_dartmouth_ball_for_shot_choice_1(){
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        System.setIn(new ByteArrayInputStream("1\n1\n".getBytes()));
+        bb.time = 51;
+        Scanner keyboard = new Scanner(System.in);
+        Mockito.doNothing().when(bb).dartmouth_jump_shot();
+        bb.dartmouth_ball();
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_dartmouth_ball_for_shot_choice_2(){
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        System.setIn(new ByteArrayInputStream("1\n1\n".getBytes()));
+        bb.time = 51;
+        Scanner keyboard = new Scanner(System.in);
+        Mockito.doNothing().when(bb).dartmouth_jump_shot();
+        bb.dartmouth_ball();
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_dartmouth_ball_for_shot_choice_2_time_100(){
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        System.setIn(new ByteArrayInputStream("1\n1\n".getBytes()));
+        bb.time = 100;
+        bb.score[0] = 10;
+        bb.score[1] = 11;
+        Scanner keyboard = new Scanner(System.in);
+        Mockito.when(Math.random()).thenReturn(0.5);
+        bb.dartmouth_ball();
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("\n   ***** End Of Game *****"));
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Final Score: Dartmouth: " + bb.score[1] + "  "
+                + bb.opponent + ": " + bb.score[0]));
+        afterEachSetup();
+    }
+    @Test
+    public void test_dartmouth_ball_for_shot_choice_not_in_choices(){
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        System.setIn(new ByteArrayInputStream("6\n4\n".getBytes()));
+        bb.time = 51;
+        Scanner keyboard = new Scanner(System.in);
+        Mockito.doNothing().when(bb).dartmouth_non_jump_shot();
+        bb.dartmouth_ball();
+        afterEachSetup();
+    }
 
     @AfterEach
     public void afterEachSetup() {
