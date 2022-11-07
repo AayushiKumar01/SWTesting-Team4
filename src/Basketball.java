@@ -110,7 +110,7 @@ public class Basketball {
     }
 
     // called when the user enters 1 or 2 for their shot
-    private void dartmouth_jump_shot() {
+    protected void dartmouth_jump_shot() {
         time ++;
         if (time == 50) {
             halftime();
