@@ -70,14 +70,18 @@ public class BasketballTest {
 
     @Test
     public void basketball_invalid_AddPoints() {
+        beforeEachSetUp();
         Basketball bb = new Basketball();
         Assert.assertThrows(ArrayIndexOutOfBoundsException.class, () -> bb.add_points(2, 2));
+        afterEachSetup();
     }
 
     @Test
     public void basketball_invalid_AddPoints2() {
+        beforeEachSetUp();
         Basketball bb = new Basketball();
         Assert.assertThrows(ArrayIndexOutOfBoundsException.class, () -> bb.add_points(-1, 1));
+        afterEachSetup();
     }
 
     @Test
@@ -426,6 +430,7 @@ public class BasketballTest {
         bb.time = 51;
         Scanner keyboard = new Scanner(System.in);
         Mockito.doNothing().when(bb).dartmouth_non_jump_shot();
+        Mockito.when(Math.random()).thenReturn(0.4);
         bb.dartmouth_ball();
         afterEachSetup();
     }
@@ -438,6 +443,7 @@ public class BasketballTest {
         bb.time = 51;
         Scanner keyboard = new Scanner(System.in);
         Mockito.doNothing().when(bb).dartmouth_jump_shot();
+        Mockito.when(Math.random()).thenReturn(0.4);
         bb.dartmouth_ball();
         afterEachSetup();
     }
@@ -450,12 +456,13 @@ public class BasketballTest {
         bb.time = 51;
         Scanner keyboard = new Scanner(System.in);
         Mockito.doNothing().when(bb).dartmouth_jump_shot();
+        Mockito.when(Math.random()).thenReturn(0.4);
         bb.dartmouth_ball();
         afterEachSetup();
     }
 
     @Test
-    public void test_dartmouth_ball_for_shot_choice_2_time_100(){
+    public void test_dartmouth_ball_for_shot_choice_2_time_100_different_scores(){
         beforeEachSetUp();
         Basketball bb = Mockito.spy(new Basketball());
         System.setIn(new ByteArrayInputStream("1\n1\n".getBytes()));
@@ -470,6 +477,26 @@ public class BasketballTest {
                 + bb.opponent + ": " + bb.score[0]));
         afterEachSetup();
     }
+
+    @Test
+    public void test_dartmouth_ball_for_shot_choice_2_time_100_same_scores(){
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        System.setIn(new ByteArrayInputStream("1\n1\n".getBytes()));
+        bb.time = 100;
+        bb.score[0] = 10;
+        bb.score[1] = 10;
+        Scanner keyboard = new Scanner(System.in);
+        Mockito.when(Math.random()).thenReturn(0.5);
+        Mockito.doNothing().when(bb).start_of_period();
+        bb.dartmouth_ball();
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("\n   ***** End Of Second Half *****"));
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Score at end of regulation time:"));
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("     Dartmouth: " + bb.score[1] + " " +
+                bb.opponent + ": " + bb.score[0]));
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Begin two minute overtime period"));
+        afterEachSetup();
+    }
     @Test
     public void test_dartmouth_ball_for_shot_choice_not_in_choices(){
         beforeEachSetUp();
@@ -478,6 +505,7 @@ public class BasketballTest {
         bb.time = 51;
         Scanner keyboard = new Scanner(System.in);
         Mockito.doNothing().when(bb).dartmouth_non_jump_shot();
+        Mockito.when(Math.random()).thenReturn(0.4);
         bb.dartmouth_ball();
         afterEachSetup();
     }
