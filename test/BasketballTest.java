@@ -250,6 +250,175 @@ public class BasketballTest {
         Mockito.verify(bb, Mockito.times(1)).opponent_jumpshot();
         afterEachSetup();
     }
+
+    private void commonMocksForNonJumpShot(Basketball bb) {
+        Mockito.doNothing().when(bb).opponent_non_jumpshot();
+        Mockito.doNothing().when(bb).opponent_jumpshot();
+        Mockito.doNothing().when(bb).halftime();
+        Mockito.doNothing().when(bb).two_minute_warning();
+        Mockito.doNothing().when(bb).change_defense();
+        Mockito.doNothing().when(bb).opponent_ball();
+        Mockito.doNothing().when(bb).dartmouth_ball();
+        Mockito.doNothing().when(bb).foul_shots(1);
+        Mockito.doNothing().when(bb).add_points(1,2);
+    }
+    @Test
+    public void test_dartmouth_non_jump_shot_scenario1()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        commonMocksForNonJumpShot(bb);
+        bb.time=49;
+        Mockito.when(Math.random()).thenReturn(0.1);
+        bb.dartmouth_non_jump_shot();
+        Mockito.verify(bb, Mockito.times(1)).halftime();
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_dartmouth_non_jump_shot_scenario2()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        commonMocksForNonJumpShot(bb);
+        bb.time=91;
+        Mockito.when(Math.random()).thenReturn(0.1);
+        bb.dartmouth_non_jump_shot();
+        Mockito.verify(bb, Mockito.times(1)).two_minute_warning();
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_dartmouth_non_jump_shot_scenario3()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        commonMocksForNonJumpShot(bb);
+        bb.shot=4;
+        Mockito.when(Math.random()).thenReturn(0.1);
+        bb.dartmouth_non_jump_shot();
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Set shot."));
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_dartmouth_non_jump_shot_scenario4()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        commonMocksForNonJumpShot(bb);
+        bb.shot=3;
+        Mockito.when(Math.random()).thenReturn(0.1);
+        bb.dartmouth_non_jump_shot();
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Lay up."));
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_dartmouth_non_jump_shot_scenario5()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        commonMocksForNonJumpShot(bb);
+        bb.shot=0;
+        Mockito.when(Math.random()).thenReturn(0.1);
+        bb.dartmouth_non_jump_shot();
+        Mockito.verify(bb, Mockito.times(1)).change_defense();
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_dartmouth_non_jump_shot_scenario6()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        commonMocksForNonJumpShot(bb);
+        bb.defense=7;
+        Mockito.when(Math.random()).thenReturn(0.5).thenReturn(0.8).thenReturn(0.876).thenReturn(0.926);
+        bb.dartmouth_non_jump_shot();
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Charging foul. Dartmouth loses the ball"));
+        Mockito.verify(bb, Mockito.times(1)).opponent_ball();
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_dartmouth_non_jump_shot_scenario7()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        commonMocksForNonJumpShot(bb);
+        bb.defense=7;
+        Mockito.when(Math.random()).thenReturn(0.5).thenReturn(0.8).thenReturn(0.876).thenReturn(0.924);
+        bb.dartmouth_non_jump_shot();
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Shot blocked. "));
+        Mockito.verify(bb, Mockito.times(1)).opponent_ball();
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_dartmouth_non_jump_shot_scenario8()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        commonMocksForNonJumpShot(bb);
+        bb.defense=7;
+        Mockito.when(Math.random()).thenReturn(0.5).thenReturn(0.8).thenReturn(0.7).thenReturn(0.45);
+        bb.dartmouth_non_jump_shot();
+        Mockito.verify(bb, Mockito.times(1)).opponent_ball();
+        Mockito.verify(bb, Mockito.times(1)).foul_shots(1);
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_dartmouth_non_jump_shot_scenario9()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        commonMocksForNonJumpShot(bb);
+        bb.defense=7;
+        Mockito.when(Math.random()).thenReturn(0.5).thenReturn(0.6).thenReturn(0.7).thenReturn(0.5);
+        bb.dartmouth_non_jump_shot();
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Shot is off the rim."));
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Dartmouth controls the rebound."));
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Ball passed back to you."));
+        Mockito.verify(bb, Mockito.times(1)).dartmouth_ball();
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_dartmouth_non_jump_shot_scenario10()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        commonMocksForNonJumpShot(bb);
+        bb.defense=7;
+        Mockito.when(Math.random()).thenReturn(0.5).thenReturn(0.6).thenReturn(0.7).thenReturn(0.3)
+                .thenReturn(0.3);
+        bb.dartmouth_non_jump_shot();
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Shot is off the rim."));
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Dartmouth controls the rebound."));
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Shot is good. Two points."));
+        Mockito.verify(bb, Mockito.times(1)).opponent_ball();
+        Mockito.verify(bb, Mockito.times(1)).add_points(1,2);
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_dartmouth_non_jump_shot_scenario11()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        commonMocksForNonJumpShot(bb);
+        bb.defense=7;
+        Mockito.when(Math.random()).thenReturn(0.5).thenReturn(0.6).thenReturn(-1.0).thenReturn(0.3);
+        bb.dartmouth_non_jump_shot();
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Shot is off the rim."));
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains(bb.opponent+" controls the rebound."));
+        Mockito.verify(bb, Mockito.times(1)).opponent_ball();
+        afterEachSetup();
+    }
+
+
     @AfterEach
     public void afterEachSetup() {
         System.setOut(standardOut);
