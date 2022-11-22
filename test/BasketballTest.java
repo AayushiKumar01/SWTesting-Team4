@@ -726,6 +726,34 @@ public class BasketballTest {
         Mockito.verify(bb, Mockito.times(1)).opponent_ball();
         afterEachSetup();
     }
+
+    @Test
+    public void test_for_run_to_get_coverage(){
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        System.setIn(new ByteArrayInputStream("9.0\n7.0\nSU\n".getBytes()));
+        Mockito.doNothing().when(bb).start_of_period();
+        bb.run();
+        afterEachSetup();
+    }
+    @Test
+    public void test_for_run_to_get_coverage_for_non_double_value_for_defense(){
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        System.setIn(new ByteArrayInputStream("ab\n7.0\nSU\n".getBytes()));
+        Mockito.doNothing().when(bb).start_of_period();
+        bb.run();
+        afterEachSetup();
+    }
+    @Test
+    public void test_for_run_to_get_coverage_for_non_valid_non_double_value_for_defense(){
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        System.setIn(new ByteArrayInputStream("9.0\nab\n7.0\nSU\n".getBytes()));
+        Mockito.doNothing().when(bb).start_of_period();
+        bb.run();
+        afterEachSetup();
+    }
     @AfterEach
     public void afterEachSetup() {
         System.setOut(standardOut);
