@@ -648,8 +648,22 @@ public class BasketballTest {
         bb.defense = 7;
         Mockito.when(Math.random()).thenReturn(0.5).thenReturn(0.6).thenReturn(0.35);
         bb.opponent_non_jumpshot();
-        Assert.assertTrue(outputStreamCaptor.toString().trim().contains(""));
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Pass back to " + bb.opponent +" guard"));
         Mockito.verify(bb, Mockito.times(1)).opponent_ball();
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_opponent_non_jump_shot_scenario8()
+    {
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        Mockito.doNothing().when(bb).dartmouth_ball();
+        bb.defense = 7;
+        Mockito.when(Math.random()).thenReturn(0.5).thenReturn(0.4);
+        bb.opponent_non_jumpshot();
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Dartmouth controls the rebound."));
+        Mockito.verify(bb, Mockito.times(1)).dartmouth_ball();
         afterEachSetup();
     }
 
