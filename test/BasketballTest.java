@@ -476,6 +476,20 @@ public class BasketballTest {
         Mockito.verify(bb,Mockito.times(1)).dartmouth_ball();
         afterEachSetup();
     }
+    @Test
+    public void test_opponent_non_jump_shot_scenario2()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        Mockito.doNothing().when(bb).dartmouth_ball();
+        Mockito.doNothing().when(bb).opponent_jumpshot();
+        bb.opponent_chance = 3;
+        Mockito.when(Math.random()).thenReturn(0.4).thenReturn(0.8).thenReturn(1.0);
+        bb.opponent_non_jumpshot();
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Lay up"));
+        Mockito.verify(bb,Mockito.times(1)).dartmouth_ball();
+        afterEachSetup();
+    }
 
     @Test
     public void test_dartmouth_non_jump_shot_halftime()
