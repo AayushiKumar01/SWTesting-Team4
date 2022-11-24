@@ -423,6 +423,19 @@ public class BasketballTest {
     }
 
     @Test
+    public void test_dartmouth_non_jump_shot_halftime()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        commonMocksForNonJumpShot(bb);
+        bb.time=49;
+        Mockito.when(Math.random()).thenReturn(0.24);
+        bb.dartmouth_non_jump_shot();
+        Mockito.verify(bb, Mockito.times(1)).halftime();
+        afterEachSetup();
+    }
+
+    @Test
     public void test_dartmouth_ball_for_shot_choice_0(){
         beforeEachSetUp();
         Basketball bb = Mockito.spy(new Basketball());
@@ -590,6 +603,7 @@ public class BasketballTest {
         Mockito.verify(bb, Mockito.times(1)).halftime();
         afterEachSetup();
     }
+
 
     @Test
     public void test_dartmouth_jump_shot_two_minute_warning()
