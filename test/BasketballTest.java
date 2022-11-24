@@ -423,6 +423,46 @@ public class BasketballTest {
     }
 
     @Test
+    public void tets_opponent_jumpshot_scenario1()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        Mockito.doNothing().when(bb).dartmouth_ball();
+        bb.defense=8.0;
+        Mockito.when(Math.random()).thenReturn(0.4).thenReturn(0.8).thenReturn(1.0);
+        bb.opponent_jumpshot();
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Offensive foul. Dartmouth's ball."));
+        Mockito.verify(bb,Mockito.times(1)).dartmouth_ball();
+        afterEachSetup();
+    }
+    @Test
+    public void test_oponent_jumpshot_scenario2()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        Mockito.doNothing().when(bb).dartmouth_ball();
+        bb.defense=8.0;
+        Mockito.when(Math.random()).thenReturn(0.4).thenReturn(0.8).thenReturn(0.7);
+        bb.opponent_jumpshot();
+        Mockito.verify(bb, Mockito.times(1)).foul_shots(0);
+        Mockito.verify(bb,Mockito.times(1)).dartmouth_ball();
+        afterEachSetup();
+    }
+
+    @Test
+    public void test_oponent_jumpshot_scenario4() {
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        Mockito.doNothing().when(bb).opponent_non_jumpshot();
+        bb.defense = 8;
+        Mockito.when(Math.random()).thenReturn(0.4).thenReturn(0.6).thenReturn(0.6).thenReturn(0.6);
+        bb.opponent_ball();
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains(""));
+        Mockito.verify(bb, Mockito.times(1)).opponent_non_jumpshot();
+        afterEachSetup();
+    }
+
+    @Test
     public void test_dartmouth_non_jump_shot_halftime()
     {
         beforeEachSetUp();
