@@ -436,7 +436,7 @@ public class BasketballTest {
         afterEachSetup();
     }
     @Test
-    public void test_oponent_jumpshot_scenario2()
+    public void test_opponent_jumpshot_scenario2()
     {
         beforeEachSetUp();
         Basketball bb=Mockito.spy(new Basketball());
@@ -450,13 +450,44 @@ public class BasketballTest {
     }
 
     @Test
-    public void test_oponent_jumpshot_scenario4() {
+    public void test_opponent_jumpshot_scenario3()
+    {
+        beforeEachSetUp();
+        Basketball bb=Mockito.spy(new Basketball());
+        Mockito.doNothing().when(bb).opponent_ball();
+        bb.defense=6;
+        Mockito.when(Math.random()).thenReturn(0.4).thenReturn(0.0001).thenReturn(0.6).thenReturn(0.8);
+        bb.opponent_jumpshot();
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Shot is off the rim."));
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains(bb.opponent + " controls the rebound."));
+        Mockito.when(Math.random()).thenReturn(0.6).thenReturn(0.8);
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Ball stolen. Easy lay up for Dartmouth."));
+        Mockito.verify(bb,Mockito.times(1)).opponent_ball();
+        Mockito.verify(bb, Mockito.times(1)).add_points(1,2);
+        afterEachSetup();
+    }
+    @Test
+    public void test_opponent_jumpshot_scenario4()
+    {
         beforeEachSetUp();
         Basketball bb = Mockito.spy(new Basketball());
         Mockito.doNothing().when(bb).opponent_non_jumpshot();
         bb.defense = 8;
         Mockito.when(Math.random()).thenReturn(0.4).thenReturn(0.6).thenReturn(0.6).thenReturn(0.6);
         bb.opponent_ball();
+        Assert.assertTrue(outputStreamCaptor.toString().trim().contains(""));
+        Mockito.verify(bb, Mockito.times(1)).opponent_non_jumpshot();
+        afterEachSetup();
+    }
+    @Test
+    public void test_opponent_jumpshot_scenario5()
+    {
+        beforeEachSetUp();
+        Basketball bb = Mockito.spy(new Basketball());
+        Mockito.doNothing().when(bb).opponent_non_jumpshot();
+        bb.defense = 6;
+        Mockito.when(Math.random()).thenReturn(0.6).thenReturn(0.006).thenReturn(0.6).thenReturn(0.6);
+        bb.opponent_jumpshot();
         Assert.assertTrue(outputStreamCaptor.toString().trim().contains(""));
         Mockito.verify(bb, Mockito.times(1)).opponent_non_jumpshot();
         afterEachSetup();
