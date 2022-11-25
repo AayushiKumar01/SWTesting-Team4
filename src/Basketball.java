@@ -25,7 +25,9 @@ public class Basketball {
     // adds points to the score
     // team can take 0 or 1, for opponent or Dartmouth, respectively
     protected void add_points(int team, int points) {
-        score[team] += points;
+        // Mutant 1 : Changing the operation from score[team] += points to score[team] -= points
+        //Any tests for add_points should kill the mutant because the logic for add points is changed now.
+        score[team] -= points;
         print_score();
     }
 
@@ -113,7 +115,9 @@ public class Basketball {
 
     // called when the user enters 1 or 2 for their shot
     protected void dartmouth_jump_shot() {
-        time ++;
+        //Mutant 2: Decreasing the value of time by 1 every time dartmouth_jump_shot is called
+        //tests for dartmouth_jump_shot for halftime() anf two_minute_warning() should fail and kill the mutant
+        time --;
         if (time == 50) {
             halftime();
         }
