@@ -733,6 +733,7 @@ public class BasketballTest {
         Mockito.doNothing().when(bb).dartmouth_jump_shot();
         Mockito.when(Math.random()).thenReturn(0.4);
         bb.dartmouth_ball();
+        Mockito.verify(bb, Mockito.times(1)).dartmouth_jump_shot();
         afterEachSetup();
     }
 
@@ -745,6 +746,7 @@ public class BasketballTest {
         Mockito.doNothing().when(bb).dartmouth_jump_shot();
         Mockito.when(Math.random()).thenReturn(0.4);
         bb.dartmouth_ball();
+        Mockito.verify(bb, Mockito.times(1)).dartmouth_jump_shot();
         afterEachSetup();
     }
 
@@ -780,6 +782,7 @@ public class BasketballTest {
         Assert.assertTrue(outputStreamCaptor.toString().trim().contains("     Dartmouth: " + bb.score[1] + " " +
                 bb.opponent + ": " + bb.score[0]));
         Assert.assertTrue(outputStreamCaptor.toString().trim().contains("Begin two minute overtime period"));
+        Mockito.verify(bb, Mockito.times(1)).start_of_period();
         afterEachSetup();
     }
     @Test
@@ -791,6 +794,7 @@ public class BasketballTest {
         Mockito.doNothing().when(bb).dartmouth_non_jump_shot();
         Mockito.when(Math.random()).thenReturn(0.4);
         bb.dartmouth_ball();
+        Mockito.verify(bb, Mockito.times(1)).dartmouth_non_jump_shot();
         afterEachSetup();
     }
 
@@ -803,6 +807,7 @@ public class BasketballTest {
         Mockito.doNothing().when(bb).dartmouth_non_jump_shot();
         Mockito.when(Math.random()).thenReturn(0.4);
         bb.dartmouth_ball();
+        Mockito.verify(bb, Mockito.times(1)).dartmouth_non_jump_shot();
         afterEachSetup();
     }
 
@@ -815,35 +820,39 @@ public class BasketballTest {
         Mockito.doNothing().when(bb).dartmouth_non_jump_shot();
         Mockito.when(Math.random()).thenReturn(0.4);
         bb.dartmouth_ball();
+        Mockito.verify(bb, Mockito.times(1)).dartmouth_non_jump_shot();
         afterEachSetup();
     }
 
     @Test
-    public void test_change_defense_for_valid_defense_choice1(){
+    public void test_change_defense_for_valid_defense_choice6(){
         beforeEachSetUp();
         Basketball bb = Mockito.spy(new Basketball());
         System.setIn(new ByteArrayInputStream("6.0\n".getBytes()));
         Mockito.doNothing().when(bb).dartmouth_ball();
         bb.change_defense();
+        Mockito.verify(bb, Mockito.times(1)).dartmouth_ball();
         afterEachSetup();
     }
     @Test
-    public void test_change_defense_for_valid_defense_choice2(){
+    public void test_change_defense_for_valid_defense_choice6_5(){
         beforeEachSetUp();
         Basketball bb = Mockito.spy(new Basketball());
         System.setIn(new ByteArrayInputStream("6.5\n".getBytes()));
         Mockito.doNothing().when(bb).dartmouth_ball();
         bb.change_defense();
+        Mockito.verify(bb, Mockito.times(1)).dartmouth_ball();
         afterEachSetup();
     }
 
     @Test
-    public void test_change_defense_for_invalid_defense_choice1(){
+    public void test_change_defense_for_invalid_defense_choice9_0(){
         beforeEachSetUp();
         Basketball bb = Mockito.spy(new Basketball());
         System.setIn(new ByteArrayInputStream("9.0\n6.5\n".getBytes()));
         Mockito.doNothing().when(bb).dartmouth_ball();
         bb.change_defense();
+        Mockito.verify(bb, Mockito.times(1)).dartmouth_ball();
         afterEachSetup();
     }
 
@@ -854,6 +863,7 @@ public class BasketballTest {
         System.setIn(new ByteArrayInputStream("9.0\n6.0\n".getBytes()));
         Mockito.doNothing().when(bb).dartmouth_ball();
         bb.change_defense();
+        Mockito.verify(bb, Mockito.times(1)).dartmouth_ball();
         afterEachSetup();
     }
 
@@ -864,6 +874,7 @@ public class BasketballTest {
         System.setIn(new ByteArrayInputStream("ab\n6.0\n".getBytes()));
         Mockito.doNothing().when(bb).dartmouth_ball();
         bb.change_defense();
+        Mockito.verify(bb, Mockito.times(1)).dartmouth_ball();
         afterEachSetup();
     }
 
