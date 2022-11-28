@@ -1030,12 +1030,13 @@ public class BasketballTest {
     }
 
     @Test
-    public void test_for_run_to_get_coverage(){
+    public void test_for_run_to_get_coverage_with_valid_defense_opponent_name(){
         beforeEachSetUp();
         Basketball bb = Mockito.spy(new Basketball());
         System.setIn(new ByteArrayInputStream("9.0\n7.0\nSU\n".getBytes()));
         Mockito.doNothing().when(bb).start_of_period();
         bb.run();
+        Mockito.verify(bb, Mockito.times(1)).start_of_period();
         afterEachSetup();
     }
     @Test
@@ -1045,6 +1046,7 @@ public class BasketballTest {
         System.setIn(new ByteArrayInputStream("ab\n7.0\nSU\n".getBytes()));
         Mockito.doNothing().when(bb).start_of_period();
         bb.run();
+        Mockito.verify(bb, Mockito.times(1)).start_of_period();
         afterEachSetup();
     }
     @Test
@@ -1054,6 +1056,7 @@ public class BasketballTest {
         System.setIn(new ByteArrayInputStream("9.0\nab\n7.0\nSU\n".getBytes()));
         Mockito.doNothing().when(bb).start_of_period();
         bb.run();
+        Mockito.verify(bb, Mockito.times(1)).start_of_period();
         afterEachSetup();
     }
 
