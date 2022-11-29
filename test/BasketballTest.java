@@ -1059,6 +1059,7 @@ public class BasketballTest {
         Mockito.verify(bb, Mockito.times(1)).start_of_period();
         afterEachSetup();
     }
+    
 
     @AfterEach
     public void afterEachSetup() {
