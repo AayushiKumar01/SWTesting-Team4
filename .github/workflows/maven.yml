@@ -43,8 +43,8 @@ jobs:
           server_address: smtp.gmail.com
           server_port: 465
           secure: true
-          username: swetha12gupta@gmail.com
-          password: ozswwwxdkdzfwvgr
+          username: ${{secrets.GMAIL_USERNAME}}
+          password: ${{secrets.GMAIL_PASSWORD}}
           subject: Github Actions Build and Test job result
           to: swetha12gupta@gmail.com
           from: Swetha
