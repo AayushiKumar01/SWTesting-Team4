@@ -423,7 +423,7 @@ public class BasketballTest {
     }
 
     @Test
-    public void tets_opponent_jumpshot_scenario1()
+    public void test_opponent_jumpshot_scenario1()
     {
         beforeEachSetUp();
         Basketball bb=Mockito.spy(new Basketball());
