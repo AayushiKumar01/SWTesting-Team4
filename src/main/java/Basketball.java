@@ -1,5 +1,5 @@
-import java.lang.Math;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Supplier;
 
