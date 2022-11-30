@@ -1,16 +1,9 @@
 
 import org.junit.Assert;
-import org.junit.Before;
-// using jupiter fails, using other works
-//import org.junit.jupiter.api.Test;
-
-// using this works
 
 
 import org.junit.Test;
 
-//import org.junit.jupiter.api.AfterEach;
-//import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -23,29 +16,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-/*
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.*;
-*/
-
 @RunWith(PowerMockRunner.class)
 @PowerMockIgnore("jdk.internal.reflect.*")
 @PrepareForTest({Basketball.class, Math.class}) // Preparing class under test.
@@ -54,7 +24,6 @@ public class BasketballTest {
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
-    //@BeforeEach
     public void beforeEachSetUp() {
         PowerMockito.mockStatic(Math.class);
         MockitoAnnotations.initMocks(this);
@@ -101,26 +70,35 @@ public class BasketballTest {
         afterEachSetup();
     }
 
-    /*
     @Test
     public void basketball_invalid_AddPoints() {
         beforeEachSetUp();
         Basketball bb = new Basketball();
-        Assert.assertThrows(ArrayIndexOutOfBoundsException.class, () -> bb.add_points(-1, 1));
-        Assert.assertThrows(ArrayIndexOutOfBoundsException.class, () -> bb.add_points(2, 2));
+        Boolean fail=false;
+        try{
+            bb.add_points(2, 2);
+        }
+        catch(Exception e){
+            fail = true;
+        }
+        Assert.assertTrue(fail==true);
         afterEachSetup();
     }
-    */
 
-    /*
     @Test
     public void basketball_invalid_AddPoints2() {
         beforeEachSetUp();
         Basketball bb = new Basketball();
-        Assert.assertThrows(ArrayIndexOutOfBoundsException.class, () -> bb.add_points(-1, 1));
+        Boolean fail=false;
+        try{
+            bb.add_points(-1, 1);
+        }
+        catch(Exception e){
+            fail = true;
+        }
+        Assert.assertTrue(fail==true);
         afterEachSetup();
     }
-    */
 
     @Test
     public void basketball_two_minute_warning_test() {
@@ -1100,7 +1078,6 @@ public class BasketballTest {
         afterEachSetup();
     }
 
-    //@AfterEach
     public void afterEachSetup() {
         System.setOut(standardOut);
     }
