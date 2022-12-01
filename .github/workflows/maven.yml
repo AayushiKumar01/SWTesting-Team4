@@ -15,7 +15,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build_and_test:
+  build:
 
     runs-on: ubuntu-latest
 
@@ -49,4 +49,4 @@ jobs:
           subject: Github Actions Build and Test job result
           to: swetha12gupta@gmail.com
           from: Swetha
-          body: Build and test job of ${{github.repository}} completed successfully!
+          body: Successfully completed building and testing of ${{github.repository}}
