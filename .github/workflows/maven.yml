@@ -46,7 +46,7 @@ jobs:
           secure: true
           username: ${{secrets.GMAIL_USERNAME}}
           password: ${{secrets.GMAIL_PASSWORD}}
-          subject: Github Actions Build and Test job result
+          subject: Github Actions job result
           to: swetha12gupta@gmail.com
           from: Swetha
           body: Successfully completed building and testing of ${{github.repository}}
